@@ -1,41 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#define pi 3.141592
 
 int main(int argc, char *argv[]) {
-    double v0, graus, rad;
-    double vx, vy;
-    double x = 0, y = 0;
-    double tempo = 0;
-    double g = 9.8;
-    double k = 0.5;
-    double dt = 0.01;
-    double pi = 3.141592;
+    float v0, graus, rad;
+    float tempo, alcance;
+    float g = 9.8;
 
     printf("Digite a velocidade inicial: ");
-    scanf("%lf", &v0);
+    scanf("%f", &v0);
 
     printf("Digite o angulo em graus: ");
-    scanf("%lf", &graus);
+    scanf("%f", &graus);
 
-    rad = graus * (pi / 180);
+    rad = graus * (pi / 180.0);
 
-    vx = v0 * cos(rad);
-    vy = v0 * sin(rad);
+    tempo = (2 * v0 * sin(rad)) / g;
+    alcance = v0 * cos(rad) * tempo;
 
-    do {
-        x = x + vx * dt;
-        y = y + vy * dt;
-
-        vx = vx - (k * vx * dt);
-        vy = vy - ((g + k * vy) * dt);
-
-        tempo = tempo + dt;
-
-    } while (y > 0);
-
-    printf("\nAlcance maximo: %.2lf metros\n", x);
-    printf("Tempo de voo: %.2lf segundos\n", tempo);
+    printf("\nAlcance maximo: %.2f metros\n", alcance);
+    printf("Tempo de voo: %.2f segundos\n", tempo);
 
     return 0;
 }
